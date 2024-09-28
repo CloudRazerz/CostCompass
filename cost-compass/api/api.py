@@ -1,7 +1,10 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/api/reverse_geocode')
+@app.route('/api/zip_to_county', methods=['POST'])
 def reverse_geocode():
-    return {'county': 'alachua'}
+    longitude = request.json['longitude']
+    latitude = request.json['latitude']
+    print(longitude, latitude)
+    return {'latitude': latitude, 'longitude': longitude}
