@@ -1,15 +1,18 @@
 /* resources.css */
 .resources-page {
-    padding: 20px;
+    padding: 150px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #395a4b;
+    height: 45rem;
   }
   
   .resources-page h1 {
     font-size: 2em;
-    color: #333;
+    color: #ffffff;
   }
   
   .resources-page ul {
-    list-style-type: none;
     padding: 0;
   }
   
