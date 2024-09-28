@@ -3,13 +3,14 @@
     width: 100vw;
     max-width: 100rem;
     margin: 0 auto;
-    padding: 2rem 3rem;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 3;
     background-color: #444343; 
     position: fixed;
+    
 }
 
 .logo {
@@ -26,6 +27,7 @@
     color: white;
     cursor: pointer;
     text-align: left;
+    
 }
 
 
