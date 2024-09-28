@@ -1,31 +1,158 @@
-/* resources.css */
-.resources-page {
-    padding: 150px;
-    font-size: 2rem;
-    text-align: center;
-    background-color: #395a4b;
-    height: 44.5rem;
-  }
+#resources {
+  margin: auto;
+  padding: 150px;
+  text-align: center;
+  height: 44.5rem;
+  background-color: #395a4b;
+  box-sizing: border-box;
+}
+
+.projContent {
+  font-size: 1.8rem;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.mobileproj {
+  display:none;
+}
+
+.proj {
+  font-weight: bold;
+  color: #7bf9c5;
+  font-size: 2.2rem;
+  padding: 10px;
+}
+
+/* project cards */
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  justify-content: center;
+  max-width: 1500px;
+  height: 100px;
+}
+
+.name {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgb(221, 217, 220);
+  font-weight: bold;
+}
+
+.description {
+  margin-bottom: 10px;
+  margin-left: 100px;
+  font-size: 15px;
+  color: rgb(247, 247, 247);
+  text-align: left;
+}
+
+
+.r-icon {
+  height:20px;
+  filter: invert(100%) sepia(0%) saturate(7436%) hue-rotate(161deg) brightness(120%) contrast(114%);
   
-  .resources-page h1 {
-    font-size: 2em;
-    color: #ffffff;
+}
+
+.mark-icon {
+  height:30px;
+  filter: invert(96%) sepia(55%) saturate(6147%) hue-rotate(191deg) brightness(87%) contrast(88%);
+}
+
+
+.box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: -10px;
+}
+
+/* mobile */
+
+@media (max-width: 640px) {
+  .proj{
+      font-size: 30px;
+      white-space: nowrap;
+      font-weight: bold;
+      margin-left: -30px;
   }
-  
-  .resources-page ul {
-    padding: 0;
+
+  .mobileproj {
+      display:contents;
+      color: gray;
+      font-size: 15px;
+      
   }
-  
-  .resources-page ul li {
-    margin: 10px 0;
+
+  .projContent {
+      width: 10px;
+      height: 10px;
+      margin-top: -60px;
   }
-  
-  .resources-page ul li a {
-    text-decoration: none;
-    color: #007BFF;
+
+  .description {
+      margin-top: 10px;
+      width: 400px;
+      font-size: 15px;
+      color: rgb(155, 143, 143);
+      margin-left: -30px;
   }
-  
-  .resources-page ul li a:hover {
-    text-decoration: underline;
+
+  .name {
+      font-size: 19px;
+      white-space: nowrap;
+      margin-left: -20px;
+
   }
-  
+
+  .r-icon{
+      margin-left: 30px;
+      margin-bottom: -50px;
+  }
+
+  .card-wrapper {
+     display:none;
+  }
+}
+@media (max-width: 960px) {
+  .mobileproj {
+      display:contents;
+      color: gray;
+      font-size: 15px;
+  }
+
+  .projContent {
+      width: 10px;
+      height: 10px;
+      margin-top: -70px;
+  }
+
+  .description {
+      margin-top: 5px;
+      width: 400px;
+      font-size: 15px;
+      padding: 0rem 2rem;
+      margin-left: -50px;
+  }
+
+  .name {
+      font-size: 19px;
+      white-space: nowrap;
+      margin-left: -20px;
+  }
+
+  .r-icon{
+      margin-left: 30px;
+      margin-bottom: -50px;
+  }
+
+  .card-wrapper {
+    display:none;
+ }
+
+}
