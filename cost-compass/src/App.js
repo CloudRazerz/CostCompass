@@ -24,7 +24,6 @@ import ResourceInfo from './components/resource-info';
 // };
 
 function App() {
-
   return (
         <div className="App">
         <Routes>
