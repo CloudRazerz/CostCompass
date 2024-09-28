@@ -1,0 +1,28 @@
+/* resources.css */
+.resources-page {
+    padding: 20px;
+  }
+  
+  .resources-page h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .resources-page ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .resources-page ul li {
+    margin: 10px 0;
+  }
+  
+  .resources-page ul li a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  
+  .resources-page ul li a:hover {
+    text-decoration: underline;
+  }
+  

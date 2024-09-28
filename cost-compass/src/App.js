@@ -1,7 +1,7 @@
-import Navbar from "./components/Navbar/navbar";
-import Intro from "./components/Intro/intro";
-import Resources from "./components/Resources/resources";
-import {APIProvider, Map} from '@vis.gl/react-google-maps'
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';  // Import necessary router components
+import Home from './components/home';
+import ResourceInfo from './components/resource-info';
 // import { motion } from "framer-motion";
 // import { useInView } from "react-intersection-observer";
 
@@ -25,24 +25,14 @@ import {APIProvider, Map} from '@vis.gl/react-google-maps'
 
 function App() {
 
-
   return (
-    <div className="App">
-      <Navbar />
-      {/* <Intro />
-      <Resources /> */}
-      <APIProvider apiKey={'api-key'} onLoad={() => console.log('Maps API has loaded.')}>
-    <Map
-      defaultZoom={13}
-      defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
-      mapId='da37f3254c6a6d1c'
-      >
-    </Map>
-  </APIProvider>
-    </div>
+        <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} /> 
+          <Route path="/resources" element={<ResourceInfo />} />
+        </Routes>
+        </div>
   );
 }
-
-
 
 export default App;
