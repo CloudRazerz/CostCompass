@@ -1,19 +1,28 @@
-import { Map } from "@vis.gl/react-google-maps";
+import { useState } from "react";
+import { Map, Marker } from "@vis.gl/react-google-maps";
 
 function MyMapComponent() {
+
+    const [marker, setMarker] = useState([]);
+
     const handleMapClick = (event) => {
         const location_data = {'latitude': event.detail.latLng.lat, 'longitude': event.detail.latLng.lng}
 
-        fetch('/api/zip_to_county', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'},
-            body: JSON.stringify(location_data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(`longitude: ${data.longitude}, latitude: ${data.latitude}`)
-            });
+        setMarker(<Marker position={event.detail.latLng} cursor='default'></Marker>)
+
+        try{
+            fetch('/api/coordinates_to_county', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'},
+                body: JSON.stringify(location_data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`longitude: ${data.longitude}, latitude: ${data.latitude}`)
+                });
+        }
+        catch{}
     };
 
     return (
@@ -24,7 +33,9 @@ function MyMapComponent() {
             gestureHandling={'none'}
             disableDefaultUI={'true'}
             keyboardShortcuts={'false'}
-            />
+            >
+            {marker}
+        </Map>
     )
 }
 
