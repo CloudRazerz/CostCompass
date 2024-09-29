@@ -15,8 +15,9 @@ function Home(){
         <Navbar />
         <div className="paragraph" id="overlay" onclick="hideOverlay()">
             <h1>Welcome to <span class="color">CostCompass!</span></h1>
-            <p>CostCompass provides a Geographic Information System (GIS)-powered map, offering real-time insights on the cost of living across Florida" By integrating data from Google Maps AI, OpenAI, and the U.S. Census, CostCompass delivers up-to-date information, helping users make informed decisions about living expenses based on budget and lifestyle preferences. Whether you're exploring local costs or regional trends, CostCompass provides precise data, highlighting differences in cost of living across various cities in Florida.</p>
-            <p>One standout feature: Over the last five years, the average cost of living in Florida has risen by 20%.</p>
+            <p>CostCompass provides a Geographic Information System (GIS)-powered map, offering real-time insights on the cost of living across the United States. By integrating data from Google Maps AI, OpenAI, and the U.S. Census, CostCompass delivers up-to-date information, helping users make informed decisions about living expenses based on budget and lifestyle preferences. Whether you're exploring local costs or regional trends, CostCompass provides precise data, highlighting differences in cost of living across various cities in the US.</p>
+            <p><span>Did you know?</span> Over the past five years, the average cost of living in the United States has increased by approximately 15%.</p>
+            <a>© Developed by TheNivedha, CostCompass is your go-to resource for financial planning in Florida. All rights reserved.</a>
     
             <a href="#" onClick={hideOverlay}><img alt="up_arrow" src={up}/></a>
         </div>
