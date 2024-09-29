@@ -12,3 +12,8 @@
     padding: 0 0;
     color:#7bf9c5;
 }
+
+#overlay a {
+    color: rgb(190, 190, 190);
+    font-size: 13px;
+}
