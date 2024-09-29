@@ -20,7 +20,15 @@ function MyMapComponent() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.location_data !== 'unavailable'){
-                        alert(`${data.location_data.county}, ${data.location_data.state}\nhome value: ${data.county_data.home_value}\nhousing cost: ${data.county_data.housing_cost}\nhousehold income: ${data.county_data.household_income}`)
+                        alert(`
+                            ${data.location_data.county}, ${data.location_data.state}\n
+                            population: ${data.county_data.population}\n
+                            home value: ${data.county_data.home_value}\n
+                            housing cost: ${data.county_data.housing_cost}\n
+                            household income: ${data.county_data.household_income}\n
+                            unemployment_rate: ${data.county_data.unemployment_rate}\n
+                            poverty_rate: ${data.county_data.poverty_rate}
+                            `)
                     }
                     else {
                         alert('no data available')
