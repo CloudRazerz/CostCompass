@@ -19,7 +19,12 @@ function MyMapComponent() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert(`longitude: ${data.longitude}, latitude: ${data.latitude}`)
+                    if (data.location_data !== 'unavailable'){
+                        alert(`${data.location_data.county}, ${data.location_data.state}\nhome value: ${data.county_data.home_value}\nhousing cost: ${data.county_data.housing_cost}\nhousehold income: ${data.county_data.household_income}`)
+                    }
+                    else {
+                        alert('no data available')
+                    }
                 });
         }
         catch{}
@@ -29,8 +34,8 @@ function MyMapComponent() {
         <Map
             defaultZoom={6.75}
             defaultCenter={{ lat: 28.1, lng: -82.5 }}
-            minZoom={6.75}
-            maxZoom={6.75}
+            maxZoom={10}
+            minZoom={3}
             options={{
                 restriction: {
                   latLngBounds: {east: -65, north: 51, south: 24, west:-126},

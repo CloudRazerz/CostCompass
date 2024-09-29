@@ -9,8 +9,12 @@ def reverse_geocode():
     latitude = request.json['latitude']
     print(longitude, latitude)
 
-    [county, state] = get_location(latitude, longitude)
-
-    stats = get_county_data(county, state)
-
-    return {'latitude': latitude, 'longitude': longitude}
+    location = get_location(latitude, longitude)
+    stats = None
+    
+    if location:
+        stats = get_county_data(location['county'], location['state'])
+        if stats:
+            return {'location_data': location, 'county_data': stats, 'description': 'AI generated text'}
+    
+    return {'location_data': 'unavailable'}

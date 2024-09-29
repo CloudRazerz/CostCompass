@@ -17,11 +17,17 @@ def get_location(lat, lng):
         address_components = result.get('address_components', [])
         for component in address_components:
             if 'administrative_area_level_2' in component.get('types', []):
-                county = component.get('long_name')
+                try:
+                    county = component.get('long_name')
+                except:
+                    return None
             if 'administrative_area_level_1' in component.get('types', []):
-                state = component.get('long_name')
-                location = [county, state]
-                return location
+                try:
+                    state = component.get('long_name')
+                    location = {'county': county, 'state': state}
+                    return location
+                except:
+                    return None
     
     return None
 
@@ -65,5 +71,5 @@ def get_county_data(county, state):
     print(f"Median Household Income: ${household_income}")
     print()
 
-    stats = [home_val, housing_cost, household_income]
+    stats = {'home_value': home_val, 'housing_cost': housing_cost, 'household_income': household_income}
     return stats
