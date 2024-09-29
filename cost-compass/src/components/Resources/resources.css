@@ -35,6 +35,10 @@
   height: 100px;
 }
 
+#overlay {
+  display: hidden;
+}
+
 .name {
   margin-top: 20px;
   font-size: 20px;

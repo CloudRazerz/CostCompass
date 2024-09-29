@@ -14,6 +14,8 @@
 
 }
 
+
+
 body{
     background: rgb(0, 0, 0);
     color: white;
@@ -39,10 +41,18 @@ body{
   justify-content: center;
   color: white;
   cursor: pointer;
+  text-align: center;
   transition: opacity 0.5s ease-in-out;
 }
 
+#overlay *{
+  margin-top: -20px;
+  font-family: "Kode Mono";
+  padding: 2rem 4rem;
+
+}
 #overlay.hidden {
   opacity: 0;
   pointer-events: none; 
 }
+
