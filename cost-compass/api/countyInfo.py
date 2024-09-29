@@ -64,12 +64,68 @@ def get_county_data(county, state):
 
     household_income = household_income_df['B19013_001E'].iloc[0]
 
+    # Total Unemployment
+    url = "https://api.census.gov/data/2022/acs/acs5?get=NAME,B23025_005E&for=county:*&in=state:*&key={}".format(census_api_key)
+    response = requests.request("GET", url)
+    unemployment_totals_df = json_to_dataframe(response)
+
+    # Total Labor Force
+    url = "https://api.census.gov/data/2022/acs/acs5?get=NAME,B23025_003E&for=county:*&in=state:*&key={}".format(census_api_key)
+    response = requests.request("GET", url)
+    labor_force_df = json_to_dataframe(response)
+
+    # Unemployment Rate
+    unemployment_totals_df.columns = ['County', 'Unemployed', 'State', 'County_Code']
+    labor_force_df.columns = ['County', 'Labor_Force', 'State', 'County_Code']
+    unemployment_rate_df = pd.merge(unemployment_totals_df, labor_force_df, on=['County', 'State', 'County_Code'])
+
+    unemployment_rate_df['Unemployed'] = pd.to_numeric(unemployment_rate_df['Unemployed'], errors='coerce')              # Convert from strings to floats
+    labor_force_df['Labor_Force'] = pd.to_numeric(labor_force_df['Labor_Force'], errors='coerce')
+
+    unemployment_rate_df['Unemployment_Rate'] = (unemployment_rate_df['Unemployed'] / labor_force_df['Labor_Force']) * 100.0
+
+    unemployment_rate = round(unemployment_rate_df['Unemployment_Rate'].iloc[0])
+
+    # Total Poverty
+    url = "https://api.census.gov/data/2022/acs/acs5?get=NAME,B17001_002E&for=county:*&in=state:*&key={}".format(census_api_key)
+    response = requests.request("GET", url)
+    poverty_totals_df = json_to_dataframe(response)
+
+    # Population
+    url = "https://api.census.gov/data/2022/acs/acs5?get=NAME,B01003_001E&for=county:*&in=state:*&key={}".format(census_api_key)
+    response = requests.request("GET", url)
+    population_df = json_to_dataframe(response)
+
+    population = population_df['B01003_001E'].iloc[0]
+
+    # Poverty Rate
+    poverty_totals_df.columns = ['County', 'Number_in_Poverty', 'State', 'County_Code']
+    population_df.columns = ['County', 'Population', 'State', 'County_Code']
+    poverty_rate_df = pd.merge(poverty_totals_df, population_df, on=['County', 'State', 'County_Code'])
+
+    poverty_totals_df['Number_in_Poverty'] = pd.to_numeric(poverty_totals_df['Number_in_Poverty'], errors='coerce')              # Convert from strings to floats
+    population_df['Population'] = pd.to_numeric(population_df['Population'], errors='coerce')
+
+    poverty_rate_df['Poverty_Rate'] = (poverty_totals_df['Number_in_Poverty'] / population_df['Population']) * 100.0
+
+    poverty_rate = round(poverty_rate_df['Poverty_Rate'].iloc[0])
+
     print()
     print(f"Location: {county}, {state}")
+    print(f"Population: {population}")
     print(f"Median Home Value: ${home_val}")
     print(f"Median Monthly Housing: ${housing_cost}")
     print(f"Median Household Income: ${household_income}")
+    print(f"Unemployment Rate: {unemployment_rate}%")
+    print(f"Poverty Rate: {poverty_rate}%")
     print()
 
-    stats = {'home_value': home_val, 'housing_cost': housing_cost, 'household_income': household_income}
+    stats = {'population': population, 
+             'home_value': home_val, 
+             'housing_cost': housing_cost, 
+             'household_income': household_income,
+             'unemployment_rate': unemployment_rate,
+             'poverty_rate': poverty_rate
+             }
+
     return stats
