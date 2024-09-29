@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Map, Marker } from "@vis.gl/react-google-maps";
+import Loader from "./loader";
 import './info-tab.css';
 
 function MyMapComponent() {
@@ -8,9 +9,12 @@ function MyMapComponent() {
     const [scroll_cover, setScrollCover] = useState(<div style={{width: '100%', height: '100%', position: 'absolute', zIndex: '0'}}></div>)
     const [info_tab, setInfoTab] = useState(<div className="infotab hidden" id="info"><h2 className="kode-mono-o">INFORMATION</h2></div>)
 
+
     const handleMapClick = async (event) => {
-        setMarker(<Marker position={event.detail.latLng} cursor={'wait'}></Marker>)
-        setScrollCover(<div style={{cursor: 'wait', width: '100%', height: '100%', position: 'absolute', zIndex: '1'}}></div>)
+        setMarker(<Marker position={event.detail.latLng} cursor={'wait'}></Marker>);
+        setScrollCover(<div style={{cursor: 'wait', width: '100%', height: '100%', position: 'absolute', zIndex: '1'}}></div>);
+        setInfoTab(<div className="infotab" id="info"><h2 className="kode-mono-o">INFORMATION</h2><Loader /></div>)
+        
         const location_data = {'latitude': event.detail.latLng.lat, 'longitude': event.detail.latLng.lng}
         
 
@@ -21,8 +25,7 @@ function MyMapComponent() {
                     'Content-Type': 'application/json'},
                 body: JSON.stringify(location_data)
                 })
-                const data = await response.json()
-                
+                const data = await response.json();
                 if (data.location_data !== 'unavailable'){
                     setInfoTab(
                         <div className="infotab">

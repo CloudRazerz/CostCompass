@@ -21,7 +21,7 @@
     font-weight: bold;
     padding-left: 20px;
 
-    
+
 }
 
 .infotab p {
@@ -40,4 +40,34 @@
     margin-left: 10px;
     margin-right: 10px;
     padding-bottom: 25px;
+    max-height: 75%;
+    display: block;
+    line-height: 1em;
+    overflow: scroll;
 }
+
+.loader-frame {
+    margin: 15px auto 0;
+    width: 90%;
+    height: 5px;
+    background-color:white;
+}
+
+@keyframes throb {
+    0% {left: 0%}
+    50% {left: 90%}
+    100% {left: 0%}
+}
+
+.loader {
+    background-color: gray;
+    width: 10%;
+    height: 5px;
+    position: relative;
+    animation-name: throb;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    z-index: 3;
+}
+
