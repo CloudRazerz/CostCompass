@@ -77,14 +77,16 @@ def get_county_data(county, state):
     # Unemployment Rate
     unemployment_totals_df.columns = ['County', 'Unemployed', 'State', 'County_Code']
     labor_force_df.columns = ['County', 'Labor_Force', 'State', 'County_Code']
-    unemployment_rate_df = pd.merge(unemployment_totals_df, labor_force_df, on=['County', 'State', 'County_Code'])
 
-    unemployment_rate_df['Unemployed'] = pd.to_numeric(unemployment_rate_df['Unemployed'], errors='coerce')              # Convert from strings to floats
+    unemployment_totals_df['Unemployed'] = pd.to_numeric(unemployment_totals_df['Unemployed'], errors='coerce')              # Convert from strings to floats
     labor_force_df['Labor_Force'] = pd.to_numeric(labor_force_df['Labor_Force'], errors='coerce')
 
-    unemployment_rate_df['Unemployment_Rate'] = (unemployment_rate_df['Unemployed'] / labor_force_df['Labor_Force']) * 100.0
+    unemployment_rate_df = pd.merge(unemployment_totals_df, labor_force_df, on=['County', 'State', 'County_Code'])
 
-    unemployment_rate = round(unemployment_rate_df['Unemployment_Rate'].iloc[0])
+
+    unemployment_rate_df['Unemployment_Rate'] = (unemployment_rate_df['Unemployed'] / unemployment_rate_df['Labor_Force']) * 100.0
+
+    unemployment_rate = round(unemployment_rate_df.loc[(unemployment_rate_df['County'] == f"{county}, {state}"), 'Unemployment_Rate'], 2).iloc[0]
 
     # Total Poverty
     url = "https://api.census.gov/data/2022/acs/acs5?get=NAME,B17001_002E&for=county:*&in=state:*&key={}".format(census_api_key)
@@ -101,14 +103,15 @@ def get_county_data(county, state):
     # Poverty Rate
     poverty_totals_df.columns = ['County', 'Number_in_Poverty', 'State', 'County_Code']
     population_df.columns = ['County', 'Population', 'State', 'County_Code']
-    poverty_rate_df = pd.merge(poverty_totals_df, population_df, on=['County', 'State', 'County_Code'])
 
     poverty_totals_df['Number_in_Poverty'] = pd.to_numeric(poverty_totals_df['Number_in_Poverty'], errors='coerce')              # Convert from strings to floats
     population_df['Population'] = pd.to_numeric(population_df['Population'], errors='coerce')
 
-    poverty_rate_df['Poverty_Rate'] = (poverty_totals_df['Number_in_Poverty'] / population_df['Population']) * 100.0
+    poverty_rate_df = pd.merge(poverty_totals_df, population_df, on=['County', 'State', 'County_Code'])
 
-    poverty_rate = round(poverty_rate_df['Poverty_Rate'].iloc[0])
+    poverty_rate_df['Poverty_Rate'] = (poverty_rate_df['Number_in_Poverty'] / poverty_rate_df['Population']) * 100.0
+
+    poverty_rate = round(poverty_rate_df.loc[(poverty_rate_df['County'] == f"{county}, {state}"), 'Poverty_Rate'], 2).iloc[0]
 
     print()
     print(f"Location: {county}, {state}")
@@ -116,7 +119,7 @@ def get_county_data(county, state):
     print(f"Median Home Value: ${home_val}")
     print(f"Median Monthly Housing: ${housing_cost}")
     print(f"Median Household Income: ${household_income}")
-    print(f"Unemployment Rate: {unemployment_rate}%")
+    print(f"Unemployment Rate: {pd.to_numeric(unemployment_rate, errors='coerce')}%")
     print(f"Poverty Rate: {poverty_rate}%")
     print()
 
