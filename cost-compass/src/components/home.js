@@ -1,7 +1,7 @@
 import Navbar from "./Navbar/navbar";
 import MyMapComponent from "./Map/map";
 import { APIProvider } from '@vis.gl/react-google-maps';
-import up from '../assets/up.png'
+import up from '../assets/up.png';
 import './home.css'; 
 
 //import Intro from "./components/Intro/intro";
@@ -19,7 +19,7 @@ function Home(){
             <p><span>Did you know?</span> Over the past five years, the average cost of living in the United States has increased by approximately 15%.</p>
             <a>© Developed by TheNivedha, CostCompass is your go-to resource for financial planning in Florida. All rights reserved.</a>
     
-            <a href="#" onClick={hideOverlay}><img alt="up_arrow" src={up}/></a>
+            <a href="#" onClick={hideOverlay} style={{cursor: 'pointer'}}><img alt="up_arrow" src={up}/></a>
         </div>
         <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
             <MyMapComponent />

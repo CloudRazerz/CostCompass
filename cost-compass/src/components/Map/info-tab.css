@@ -1,0 +1,35 @@
+.infotab {
+    width: 25%;
+    height: 66%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-top-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    z-index: 2;
+    text-align: left;
+}
+
+.infotab h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    padding-left: 10px;
+
+    
+}
+
+.infotab p {
+    left: 10%;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.infotab .h2 .color {
+    padding: 0 0;
+    color:#7bf9c5;
+}

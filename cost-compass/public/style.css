@@ -40,7 +40,6 @@ body{
   align-items: center;
   justify-content: center;
   color: white;
-  cursor: pointer;
   text-align: center;
   transition: opacity 0.5s ease-in-out;
 }
