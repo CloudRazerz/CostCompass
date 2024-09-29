@@ -6,7 +6,7 @@ function MyMapComponent() {
 
     const [marker, setMarker] = useState([]);
     const [scroll_cover, setScrollCover] = useState(<div style={{width: '100%', height: '100%', position: 'absolute', zIndex: '0'}}></div>)
-    const [info_tab, setInfoTab] = useState(<div className="infotab"></div>)
+    const [info_tab, setInfoTab] = useState(<div className="infotab hidden" id="info"><h2 className="kode-mono-o">INFORMATION</h2></div>)
 
     const handleMapClick = async (event) => {
         setMarker(<Marker position={event.detail.latLng} cursor={'wait'}></Marker>)
@@ -24,36 +24,35 @@ function MyMapComponent() {
                 const data = await response.json()
                 
                 if (data.location_data !== 'unavailable'){
-                    // alert(`
-                    //     ${data.location_data.county}, ${data.location_data.state}\n
-                    //     population: ${data.county_data.population}\n
-                    //     home value: ${data.county_data.home_value}\n
-                    //     housing cost: ${data.county_data.housing_cost}\n
-                    //     household income: ${data.county_data.household_income}\n
-                    //     unemployment_rate: ${data.county_data.unemployment_rate}\n
-                    //     poverty_rate: ${data.county_data.poverty_rate}
-                    //     `)
                     setInfoTab(
                         <div className="infotab">
-                            <h2 className="kode-mono-o"><span className="color">{data.location_data.county}</span>, {data.location_data.state}</h2>
-                            <p>{data.description}</p>
-                            <p>Population: {data.county_data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                            <p>Median Home Value: ${data.county_data.home_value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                            <p>Median Housing Cost: ${data.county_data.housing_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                            <p>Median Household Income: ${data.county_data.household_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                            <p>Unemployment Rate: {data.county_data.unemployment_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%</p>
-                            <p>Poverty Rate: {data.county_data.poverty_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%</p>
+                            <h2 className="kode-mono-o"><span className="color kode-mono-o">{data.location_data.county}</span>, {data.location_data.state}</h2>
+                            <p className="kode-mono-o">{data.description}</p>
+                            <p className="kode-mono-o">Population: {data.county_data.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <p className="kode-mono-o">Median Home Value: ${data.county_data.home_value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <p className="kode-mono-o">Median Housing Cost: ${data.county_data.housing_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <p className="kode-mono-o">Median Household Income: ${data.county_data.household_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <p className="kode-mono-o">Unemployment Rate: {data.county_data.unemployment_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%</p>
+                            <p className="kode-mono-o">Poverty Rate: {data.county_data.poverty_rate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%</p>
                         </div>
                     )
                 }
                 else {
-                    alert('no data available')
+                    setInfoTab(
+                        <div className="infotab">
+                            <h2 className="kode-mono-o">No data available</h2>
+                        </div>
+                    )
                 };
         }
         catch{
             setMarker(<Marker position={event.detail.latLng} cursor={'default'}></Marker>)
             setScrollCover(<div style={{width: '100%', height: '100%', position: 'absolute', zIndex: '0'}}></div>)
-            alert('api unavailable')
+            setInfoTab(
+                <div className="infotab">
+                    <h2 className="kode-mono-o">Server unavailable</h2>
+                </div>
+            )
         }
         finally{
             setMarker(<Marker position={event.detail.latLng} cursor={'default'}></Marker>)

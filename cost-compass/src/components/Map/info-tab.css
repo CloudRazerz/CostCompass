@@ -1,6 +1,6 @@
 .infotab {
     width: 25%;
-    height: 66%;
+    height: 75%;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -12,24 +12,32 @@
     justify-content: left;
     z-index: 2;
     text-align: left;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.infotab h2 {
-    margin-top: 30px;
+.infotab h2, .infotab h2 * {
+    margin-top: 20px;
     margin-bottom: 15px;
     font-weight: bold;
-    padding-left: 10px;
+    padding-left: 20px;
 
     
 }
 
 .infotab p {
+
     left: 10%;
-    margin-top: 5px;
-    padding-left: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.infotab .h2 .color {
+.infotab .color {
     padding: 0 0;
     color:#7bf9c5;
+}
+
+.infotab p:first-of-type {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 25px;
 }

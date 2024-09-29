@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="logo kode-mono-o">COSTCOMPASS</div>
             <div className="desktopMenu">
-                <Link className="desktopMenuListItem kode-mono-o" to="/">MAP</Link>
+                <Link className="desktopMenuListItem kode-mono-o" to="/" onClick={() => window.location.reload()}>MAP</Link>
                 <Link className="desktopMenuListItem kode-mono-o" to="/resources">RESOURCES</Link>
             </div>
         </nav>

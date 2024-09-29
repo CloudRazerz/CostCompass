@@ -7,6 +7,7 @@ import './home.css';
 //import Intro from "./components/Intro/intro";
 function hideOverlay() {
     document.getElementById('overlay').classList.add('hidden');
+    document.getElementById('info').classList.remove('hidden');
 }
 
 function Home(){
