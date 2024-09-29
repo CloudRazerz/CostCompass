@@ -1,5 +1,6 @@
 from flask import Flask, request
 from countyInfo import get_location, get_county_data
+from chatbot import get_message
 
 app = Flask(__name__)
 
@@ -15,6 +16,6 @@ def reverse_geocode():
     if location:
         stats = get_county_data(location['county'], location['state'])
         if stats:
-            return {'location_data': location, 'county_data': stats, 'description': 'AI generated text'}
+            return {'location_data': location, 'county_data': stats, 'description': get_message(location['county'], location['state'], stats)}
     
     return {'location_data': 'unavailable'}
