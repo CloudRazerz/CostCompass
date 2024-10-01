@@ -98,6 +98,8 @@ def get_county_data(county, state):
     response = requests.request("GET", url)
     population_df = json_to_dataframe(response)
 
+    population_df = population_df[population_df['NAME'] == f"{county}, {state}"]
+
     population = population_df['B01003_001E'].iloc[0]
 
     # Poverty Rate
